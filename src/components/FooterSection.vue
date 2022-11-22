@@ -3,6 +3,7 @@
     <footer class="footer flex flex-col bg-grey-800 pt-14 pb-24">
       <div class="flex justify-center mb-12">
         <img :src="logo" alt="Logo" class="w-32 h-32 rounded-circle" />
+        <!-- added logo -->
       </div>
       <div
         class="flex flex-col md:flex-row text-xl justify-center text-white/90"
@@ -28,27 +29,6 @@
                 href="#"
                 class="pb-2 hover:underline inline-block underline-offset-4 transition-all"
                 >Contact us</a
-              >
-            </li>
-            <li>
-              <a
-                href="#"
-                class="pb-2 hover:underline inline-block underline-offset-4 transition-all"
-                >Careers</a
-              >
-            </li>
-            <li>
-              <a
-                href="#"
-                class="pb-2 hover:underline inline-block underline-offset-4 transition-all"
-                >Terms of use</a
-              >
-            </li>
-            <li>
-              <a
-                href="#"
-                class="pb-2 hover:underline inline-block underline-offset-4 transition-all"
-                >Privacy policy</a
               >
             </li>
           </ul>
@@ -90,6 +70,7 @@
       <div class="flex justify-center items-center text-white/90 py-8">
         <p class="text-sm">
           &copy; 2022 All rights reserved &#x2022; {{ developer }}
+          <!-- added developer -->
         </p>
       </div>
     </footer>
@@ -119,7 +100,7 @@ export default {
           resp.data.data.fields.footer_component);
       })
       .catch(function (resp) {
-        // console.log(resp);
+        console.log(resp);
       });
   },
 };

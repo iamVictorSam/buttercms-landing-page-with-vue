@@ -18,6 +18,7 @@
           <div
             class="grid grid-cols-1 gap-y-16 md:grid-cols-2 md:gap-x-12 md:gap-y-16"
           >
+            <!-- looping through the response array -->
             <div v-for="data in res">
               <div
                 class="relative flex flex-col gap-6 sm:flex-row md:flex-col lg:flex-row"
@@ -25,16 +26,19 @@
                 <div
                   class="flex h-40 w-40 items-center justify-center rounded-xl text-white sm:shrink-0"
                 >
-                  <img :src="data.image" alt="img1" />
+                  <img :src="data.image" :alt="data.image" />
+                  <!-- added image -->
                 </div>
                 <div class="sm:min-w-0 sm:flex-1">
                   <p
                     class="text-lg font-semibold leading-8 uppercase text-emerald-500"
                   >
                     {{ data.feature_title }}
+                    <!-- added title -->
                   </p>
                   <p class="mt-2 text-base leading-7 text-slate-100">
                     {{ data.feature_desc }}
+                    <!-- added description -->
                   </p>
                 </div>
               </div>
@@ -64,27 +68,11 @@ export default {
     butter.content
       .retrieve(["features"])
       .then((resp) => {
-        // console.log(resp.data.data.features);
         this.res = resp.data.data.features;
       })
       .catch(function (resp) {
         console.log(resp);
       });
-
-    // butter.page
-    //   .retrieve("*", "home")
-    //   .then((resp) => {
-    //     console.log(resp.data.data.fields.header_component);
-
-    //     ({
-    //       image: this.image,
-    //       title: this.title,
-    //       description: this.description,
-    //     } = resp.data.data.fields.header_component);
-    //   })
-    //   .catch(function (resp) {
-    //     console.log(resp);
-    //   });
   },
 };
 </script>
