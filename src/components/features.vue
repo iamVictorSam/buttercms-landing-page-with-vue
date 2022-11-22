@@ -18,93 +18,25 @@
           <div
             class="grid grid-cols-1 gap-y-16 md:grid-cols-2 md:gap-x-12 md:gap-y-16"
           >
-            <div
-              class="relative flex flex-col gap-6 sm:flex-row md:flex-col lg:flex-row"
-            >
+            <div v-for="data in res">
               <div
-                class="flex h-40 w-40 items-center justify-center rounded-xl text-white sm:shrink-0"
+                class="relative flex flex-col gap-6 sm:flex-row md:flex-col lg:flex-row"
               >
-                <img src="../assets/image1.png" alt="img1" />
-              </div>
-              <div class="sm:min-w-0 sm:flex-1">
-                <p
-                  class="text-lg font-semibold leading-8 uppercase text-emerald-500"
+                <div
+                  class="flex h-40 w-40 items-center justify-center rounded-xl text-white sm:shrink-0"
                 >
-                  Competitive exchange rates
-                </p>
-                <p class="mt-2 text-base leading-7 text-slate-100">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Maiores impedit perferendis suscipit eaque, iste dolor
-                  cupiditate blanditiis ratione.
-                </p>
-              </div>
-            </div>
-
-            <div
-              class="relative flex flex-col gap-6 sm:flex-row md:flex-col lg:flex-row"
-            >
-              <div
-                class="flex h-40 w-40 items-center justify-center rounded-xl text-white sm:shrink-0"
-              >
-                <img src="../assets/image2.png" alt="img2" />
-              </div>
-              <div class="sm:min-w-0 sm:flex-1">
-                <p
-                  class="text-lg font-semibold leading-8 uppercase text-emerald-500"
-                >
-                  No hidden fees
-                </p>
-                <p class="mt-2 text-base leading-7 text-slate-100">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Maiores impedit perferendis suscipit eaque, iste dolor
-                  cupiditate blanditiis ratione.
-                </p>
-              </div>
-            </div>
-
-            <div
-              class="relative flex flex-col gap-6 sm:flex-row md:flex-col lg:flex-row"
-            >
-              <div
-                class="flex h-40 w-40 items-center justify-center rounded-xl text-white sm:shrink-0"
-              >
-                <!-- Heroicon name: outline/bolt -->
-                <img src="../assets/image3.png" alt="img3" />
-              </div>
-              <div class="sm:min-w-0 sm:flex-1">
-                <p
-                  class="text-lg font-semibold leading-8 uppercase text-emerald-500"
-                >
-                  Transfers are instant
-                </p>
-                <p class="mt-2 text-base leading-7 text-slate-100">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Maiores impedit perferendis suscipit eaque, iste dolor
-                  cupiditate blanditiis ratione.
-                </p>
-              </div>
-            </div>
-
-            <div
-              class="relative flex flex-col gap-6 sm:flex-row md:flex-col lg:flex-row"
-            >
-              <div
-                class="flex h-40 w-40 items-center justify-center rounded-xl text-white sm:shrink-0"
-              >
-                <!-- Heroicon name: outline/device-phone-mobile -->
-                <img src="../assets/image4.png" alt="img4" />
-              </div>
-              <div class="sm:min-w-0 sm:flex-1">
-                <p
-                  class="text-lg font-semibold leading-8 uppercase text-emerald-500"
-                >
-                  Mobile notifications
-                </p>
-                <p class="mt-2 text-base leading-7 text-slate-100">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Maiores impedit perferendis suscipit eaque, iste dolor
-                  cupiditate blanditiis ratione.
-                </p>
+                  <img :src="data.image" alt="img1" />
+                </div>
+                <div class="sm:min-w-0 sm:flex-1">
+                  <p
+                    class="text-lg font-semibold leading-8 uppercase text-emerald-500"
+                  >
+                    {{ data.feature_title }}
+                  </p>
+                  <p class="mt-2 text-base leading-7 text-slate-100">
+                    {{ data.feature_desc }}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -113,6 +45,48 @@
     </div>
   </div>
 </template>
+
+<script>
+import Butter from "buttercms";
+
+export default {
+  data() {
+    return {
+      res: null,
+    };
+  },
+
+  mounted() {
+    const butter = Butter(import.meta.env.VITE_BUTTER_API_KEY);
+
+
+    butter.content
+      .retrieve(["features"])
+      .then((resp) => {
+        // console.log(resp.data.data.features);
+        this.res = resp.data.data.features;
+      })
+      .catch(function (resp) {
+        console.log(resp);
+      });
+
+    // butter.page
+    //   .retrieve("*", "home")
+    //   .then((resp) => {
+    //     console.log(resp.data.data.fields.header_component);
+
+    //     ({
+    //       image: this.image,
+    //       title: this.title,
+    //       description: this.description,
+    //     } = resp.data.data.fields.header_component);
+    //   })
+    //   .catch(function (resp) {
+    //     console.log(resp);
+    //   });
+  },
+};
+</script>
 
 <style scoped>
 .heading-secondary {

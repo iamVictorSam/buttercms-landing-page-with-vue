@@ -3,7 +3,7 @@
     <footer class="footer flex flex-col bg-grey-800 pt-14 pb-24">
       <div class="flex justify-center mb-12">
         <img
-          src="../assets/logo2.png"
+          :src="logo"
           alt="Logo"
           class="w-32 h-32 rounded-circle"
         />
@@ -93,9 +93,43 @@
 
       <div class="flex justify-center items-center text-white/90 py-8">
         <p class="text-sm">
-          &copy; 2022 All rights reserved &#x2022; Sam Victor
+          &copy; 2022 All rights reserved &#x2022; {{developer}}
         </p>
       </div>
     </footer>
   </div>
 </template>
+
+
+<script>
+import Butter from "buttercms";
+
+export default {
+  data() {
+    return {
+      logo: null,
+      developer: null,
+    };
+  },
+
+
+  mounted() {
+    const butter = Butter(import.meta.env.VITE_BUTTER_API_KEY);
+
+
+    butter.page
+      .retrieve("*", "footer")
+      .then((resp) => {
+
+        ({
+          logo: this.logo,
+          developer: this.developer,
+         
+        } = resp.data.data.fields.footer);
+      })
+      .catch(function (resp) {
+        // console.log(resp);
+      });
+  },
+};
+</script>

@@ -1,6 +1,6 @@
 <template>
   <section class="bg-white">
-    <img src="../assets/res.png" alt="" srcset="" />
+    <img :src="image" alt="image" srcset="" />
     <div class="isolate h-85 flex items-center justify-center pt-20">
       <div
         class="absolute inset-x-0 -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
@@ -40,23 +40,12 @@
                 <h1
                   class="heading-secondary text-5xl font-bold tracking-tight sm:text-center sm:text-6xl text-gray-400 uppercase pb-8"
                 >
-                  Welcome to Jexxie Code
+                  {{ title }}
                 </h1>
                 <p class="mt-6 text-lg leading-8 text-gray-600 sm:text-center">
-                  Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure
-                  qui lorem cupidatat commodo. Elit sunt amet fugiat veniam
-                  occaecat fugiat aliqua. Lorem ipsum dolor sit amet consectetur
-                  adipisicing elit.
+                  {{ description }}
                 </p>
 
-                <p class="mt-6 text-lg leading-8 text-gray-600 sm:text-center">
-                  Ratione perspiciatis delectus, recusandae at dignissimos
-                  doloribus eius eaque ipsum nesciunt voluptas quis in pariatur
-                  libero eum. Mollitia quae molestias reiciendis dicta, autem et
-                  unde temporibus sapiente possimus magnam nulla, libero quaerat
-                  deserunt harum est! Explicabo omnis labore at et impedit
-                  maiores!
-                </p>
                 <div class="mt-8 flex gap-x-4 sm:justify-center">
                   <a
                     href="#"
@@ -112,6 +101,40 @@
     </div>
   </section>
 </template>
+
+<script>
+import Butter from "buttercms";
+
+export default {
+  data() {
+    return {
+      image: null,
+      title: null,
+      description: null,
+    };
+  },
+
+
+  mounted() {
+    const butter = Butter(import.meta.env.VITE_BUTTER_API_KEY);
+
+
+    butter.page
+      .retrieve("*", "home")
+      .then((resp) => {
+
+        ({
+          image: this.image,
+          title: this.title,
+          description: this.description,
+        } = resp.data.data.fields.header_component);
+      })
+      .catch(function (resp) {
+        // console.log(resp);
+      });
+  },
+};
+</script>
 
 <style scoped>
 .heading-secondary {
