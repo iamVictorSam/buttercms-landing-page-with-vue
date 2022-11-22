@@ -2,11 +2,7 @@
   <div>
     <footer class="footer flex flex-col bg-grey-800 pt-14 pb-24">
       <div class="flex justify-center mb-12">
-        <img
-          :src="logo"
-          alt="Logo"
-          class="w-32 h-32 rounded-circle"
-        />
+        <img :src="logo" alt="Logo" class="w-32 h-32 rounded-circle" />
       </div>
       <div
         class="flex flex-col md:flex-row text-xl justify-center text-white/90"
@@ -93,18 +89,19 @@
 
       <div class="flex justify-center items-center text-white/90 py-8">
         <p class="text-sm">
-          &copy; 2022 All rights reserved &#x2022; {{developer}}
+          &copy; 2022 All rights reserved &#x2022; {{ developer }}
         </p>
       </div>
     </footer>
   </div>
 </template>
 
-
 <script>
 import Butter from "buttercms";
 
 export default {
+  name: "Footer",
+
   data() {
     return {
       logo: null,
@@ -112,20 +109,14 @@ export default {
     };
   },
 
-
   mounted() {
     const butter = Butter(import.meta.env.VITE_BUTTER_API_KEY);
-
 
     butter.page
       .retrieve("*", "footer")
       .then((resp) => {
-
-        ({
-          logo: this.logo,
-          developer: this.developer,
-         
-        } = resp.data.data.fields.footer);
+        ({ logo: this.logo, developer: this.developer } =
+          resp.data.data.fields.footer_component);
       })
       .catch(function (resp) {
         // console.log(resp);

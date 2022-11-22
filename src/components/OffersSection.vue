@@ -8,7 +8,7 @@
           <h2
             class="heading-secondary font-bold inline-block text-4xl md:text-5xl uppercase transition-all"
           >
-            {{data.main_title}}
+            {{ data.main_title }}
           </h2>
         </div>
 
@@ -17,10 +17,10 @@
             <h3
               class="text-2xl md:text-2xl font-bold uppercase mb-4 text-slate-600"
             >
-              {{data.subtitle}}
+              {{ data.subtitle }}
             </h3>
             <p class="text-lg mb-8 text-emerald-700">
-         {{data.description}}
+              {{ data.description }}
             </p>
 
             <a
@@ -53,8 +53,6 @@
         </div>
       </section>
     </div>
-
-  
   </main>
 </template>
 
@@ -62,6 +60,8 @@
 import Butter from "buttercms";
 
 export default {
+  name: "Offers",
+
   data() {
     return {
       res: null,
@@ -70,7 +70,6 @@ export default {
 
   mounted() {
     const butter = Butter(import.meta.env.VITE_BUTTER_API_KEY);
-
 
     butter.content
       .retrieve(["offers"])

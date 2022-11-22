@@ -113,16 +113,14 @@ export default {
       description: null,
     };
   },
-
+  name: "Header",
 
   mounted() {
     const butter = Butter(import.meta.env.VITE_BUTTER_API_KEY);
 
-
     butter.page
       .retrieve("*", "home")
       .then((resp) => {
-
         ({
           image: this.image,
           title: this.title,
@@ -130,7 +128,7 @@ export default {
         } = resp.data.data.fields.header_component);
       })
       .catch(function (resp) {
-        // console.log(resp);
+        console.log(resp);
       });
   },
 };

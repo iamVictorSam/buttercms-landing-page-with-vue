@@ -50,6 +50,8 @@
 import Butter from "buttercms";
 
 export default {
+  name: "Features",
+
   data() {
     return {
       res: null,
@@ -58,7 +60,6 @@ export default {
 
   mounted() {
     const butter = Butter(import.meta.env.VITE_BUTTER_API_KEY);
-
 
     butter.content
       .retrieve(["features"])
