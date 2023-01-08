@@ -48,9 +48,11 @@
 
 <script>
 
-export default {
-  props: ["offersContent"],
 
+export default {
+  name: "Offers",
+
+  props: ["offersContent"],
 };
 </script>
 

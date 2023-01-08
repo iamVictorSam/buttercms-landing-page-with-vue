@@ -41,8 +41,6 @@
 </template>
 
 <script>
-import Butter from "buttercms";
-
 export default {
   name: "Features",
 
