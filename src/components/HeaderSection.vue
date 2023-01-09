@@ -40,37 +40,11 @@
 </template>
 
 <script>
-import Butter from "buttercms";
-
 export default {
   name: "Header",
 
   props: ["headerComponent"],
 
-  // data() {
-  //   return {
-  //     image: null,
-  //     title: null,
-  //     description: null,
-  //   };
-  // },
-
-  // mounted() {
-  //   const butter = Butter(import.meta.env.VITE_BUTTER_API_KEY);
-
-  //   butter.page
-  //     .retrieve("*", "home")
-  //     .then((resp) => {
-  //       ({
-  //         image: this.image,
-  //         title: this.title,
-  //         description: this.description,
-  //       } = resp.data.data.fields.header_component);
-  //     })
-  //     .catch(function (resp) {
-  //       console.log(resp);
-  //     });
-  // },
 };
 </script>
 
