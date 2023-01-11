@@ -6,11 +6,10 @@ import Footer from "./components/FooterSection.vue";
 import { ref, onMounted } from "vue";
 import Butter from "buttercms";
 
-let headerComponent = ref(null);
-let footerComponent = ref(null);
-let offersContent = ref([]);
-let featuresContents = ref(null);
-let fields
+const headerComponent = ref(null);
+const footerComponent = ref(null);
+const offersContent = ref([]);
+const featuresContents = ref(null);
 
 onMounted(() => {
   const butter = Butter(import.meta.env.VITE_BUTTER_API_KEY);
@@ -18,23 +17,16 @@ onMounted(() => {
   butter.page
     .retrieve("*", "landing-page")
     .then((resp) => {
-
-
       const { offers, header_component, footer_component, features } = resp.data.data.fields;
 
       headerComponent.value = header_component;
       footerComponent.value = footer_component;
       featuresContents.value = features;
       offersContent.value = offers;
-
-      console.log(featuresContents.value.length)
-
-
     })
     .catch(function (resp) {
       console.log(resp);
     });
-
 
 });
 </script>
