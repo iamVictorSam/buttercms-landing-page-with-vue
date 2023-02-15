@@ -13,8 +13,7 @@ let featuresContents = ref(null);
 let fields
 
 onMounted(() => {
-  const butter = Butter("9e2fca70ac936624a3e8b6ccbc0397938606d394");
-  //9e2fca70ac936624a3e8b6ccbc0397938606d394
+  const butter = Butter(import.meta.env.VITE_BUTTER_API_KEY);
 
   butter.page
     .retrieve("*", "landing-page")
