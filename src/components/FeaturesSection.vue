@@ -3,9 +3,7 @@
     <div class="bg-gray-800 py-24 sm:py-32 lg:py-40">
       <div class="mx-auto max-w-7xl px-6 lg:px-8">
         <div class="sm:text-center">
-          <p
-            class="heading-secondary font-bold inline-block text-3xl md:text-5xl uppercase transition-all"
-          >
+          <p class="heading-secondary font-bold inline-block text-3xl md:text-5xl uppercase transition-all">
             A better way to send money
           </p>
           <p class="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-100">
@@ -15,24 +13,16 @@
         </div>
 
         <div class="mt-20 max-w-lg sm:mx-auto md:max-w-none">
-          <div
-            class="grid grid-cols-1 gap-y-16 md:grid-cols-2 md:gap-x-12 md:gap-y-16"
-          >
+          <div class="grid grid-cols-1 gap-y-16 md:grid-cols-2 md:gap-x-12 md:gap-y-16">
             <!-- looping through the response array -->
-            <div v-for="data in res">
-              <div
-                class="relative flex flex-col gap-6 sm:flex-row md:flex-col lg:flex-row"
-              >
-                <div
-                  class="flex h-40 w-40 items-center justify-center rounded-xl text-white sm:shrink-0"
-                >
+            <div v-for="data in featuresContents">
+              <div class="relative flex flex-col gap-6 sm:flex-row md:flex-col lg:flex-row">
+                <div class="flex h-40 w-40 items-center justify-center rounded-xl text-white sm:shrink-0">
                   <img :src="data.image" :alt="data.image" />
                   <!-- added image -->
                 </div>
                 <div class="sm:min-w-0 sm:flex-1">
-                  <p
-                    class="text-lg font-semibold leading-8 uppercase text-emerald-500"
-                  >
+                  <p class="text-lg font-semibold leading-8 uppercase text-emerald-500">
                     {{ data.feature_title }}
                     <!-- added title -->
                   </p>
@@ -56,24 +46,8 @@ import Butter from "buttercms";
 export default {
   name: "Features",
 
-  data() {
-    return {
-      res: null,
-    };
-  },
+  props: ["featuresContents"],
 
-  mounted() {
-    const butter = Butter(import.meta.env.VITE_BUTTER_API_KEY);
-
-    butter.content
-      .retrieve(["features"])
-      .then((resp) => {
-        this.res = resp.data.data.features;
-      })
-      .catch(function (resp) {
-        console.log(resp);
-      });
-  },
 };
 </script>
 

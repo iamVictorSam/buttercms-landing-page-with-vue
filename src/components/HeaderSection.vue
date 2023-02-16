@@ -1,6 +1,6 @@
 <template>
   <section class="bg-white">
-    <img :src="image" alt="image" srcset="" />
+    <img :src="headerComponent.image" alt="image" srcset="" />
     <!-- added this -->
     <div class="isolate h-85 flex items-center justify-center pt-20">
       <main>
@@ -9,30 +9,23 @@
             <div>
               <div>
                 <h1
-                  class="heading-secondary text-5xl font-bold tracking-tight sm:text-center sm:text-6xl text-gray-400 uppercase pb-8"
-                >
-                  {{ title }}
+                  class="heading-secondary text-5xl font-bold tracking-tight sm:text-center sm:text-6xl text-gray-400 uppercase pb-8">
+                  {{ headerComponent.title }}
                   <!-- added this -->
                 </h1>
                 <p class="mt-6 text-lg leading-8 text-gray-600 sm:text-center">
-                  {{ description }}
+                  {{ headerComponent.description }}
                   <!-- added this -->
                 </p>
 
                 <div class="mt-8 flex gap-x-4 sm:justify-center">
-                  <a
-                    href="#"
-                    class="inline-block rounded-lg bg-green-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-green-600 hover:bg-green-700 hover:ring-green-700"
-                  >
+                  <a href="#"
+                    class="inline-block rounded-lg bg-green-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-green-600 hover:bg-green-700 hover:ring-green-700">
                     Explore now
-                    <span class="text-indigo-200" aria-hidden="true"
-                      >&rarr;</span
-                    >
+                    <span class="text-indigo-200" aria-hidden="true">&rarr;</span>
                   </a>
-                  <a
-                    href="#"
-                    class="inline-block rounded-lg px-4 py-1.5 text-base font-semibold leading-7 text-gray-900 ring-1 ring-gray-900/10 hover:ring-gray-900/20"
-                  >
+                  <a href="#"
+                    class="inline-block rounded-lg px-4 py-1.5 text-base font-semibold leading-7 text-gray-900 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
                     Check out our Sessions
                     <span class="text-gray-400" aria-hidden="true">&rarr;</span>
                   </a>
@@ -52,30 +45,32 @@ import Butter from "buttercms";
 export default {
   name: "Header",
 
-  data() {
-    return {
-      image: null,
-      title: null,
-      description: null,
-    };
-  },
+  props: ["headerComponent"],
 
-  mounted() {
-    const butter = Butter(import.meta.env.VITE_BUTTER_API_KEY);
+  // data() {
+  //   return {
+  //     image: null,
+  //     title: null,
+  //     description: null,
+  //   };
+  // },
 
-    butter.page
-      .retrieve("*", "home")
-      .then((resp) => {
-        ({
-          image: this.image,
-          title: this.title,
-          description: this.description,
-        } = resp.data.data.fields.header_component);
-      })
-      .catch(function (resp) {
-        console.log(resp);
-      });
-  },
+  // mounted() {
+  //   const butter = Butter(import.meta.env.VITE_BUTTER_API_KEY);
+
+  //   butter.page
+  //     .retrieve("*", "home")
+  //     .then((resp) => {
+  //       ({
+  //         image: this.image,
+  //         title: this.title,
+  //         description: this.description,
+  //       } = resp.data.data.fields.header_component);
+  //     })
+  //     .catch(function (resp) {
+  //       console.log(resp);
+  //     });
+  // },
 };
 </script>
 
@@ -110,9 +105,11 @@ section {
   h1 {
     font-size: 1rem;
   }
+
   p {
     font-size: 14px;
   }
+
   a {
     font-size: 14px;
   }
